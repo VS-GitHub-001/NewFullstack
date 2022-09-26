@@ -158,3 +158,7 @@ Here are a few ways by which you can support.
 <br>
 
 <a href="https://www.buymeacoffee.com/codewithmukesh"><img width="250" alt="black-button" src="https://user-images.githubusercontent.com/31455818/138557309-27587d91-7b82-4cab-96bb-90f4f4e600f1.png" ></a>
+
+
+  "email":"admin@root.com",
+    "password":"123Pa$$word!"

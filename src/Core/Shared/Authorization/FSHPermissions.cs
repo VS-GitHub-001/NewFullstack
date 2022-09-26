@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 
 namespace FSH.WebApi.Shared.Authorization;
 
+
 public static class FSHAction
 {
     public const string View = nameof(View);
@@ -26,6 +27,12 @@ public static class FSHResource
     public const string RoleClaims = nameof(RoleClaims);
     public const string Products = nameof(Products);
     public const string Brands = nameof(Brands);
+    public const string Categories = nameof(Categories);
+    public const string UnitsOfMeasurements = nameof(UnitsOfMeasurements);
+    public const string UnitsOfMeasurementsConversion = nameof(UnitsOfMeasurementsConversion);
+    public const string Suppliers = nameof(Suppliers);
+    public const string PurchaseOrderHeaders = nameof(PurchaseOrderHeaders);
+    public const string PurchaseOrder = nameof(PurchaseOrder);
 }
 
 public static class FSHPermissions
@@ -61,16 +68,46 @@ public static class FSHPermissions
         new("Delete Brands", FSHAction.Delete, FSHResource.Brands),
         new("Generate Brands", FSHAction.Generate, FSHResource.Brands),
         new("Clean Brands", FSHAction.Clean, FSHResource.Brands),
+        new("Search Category", FSHAction.Search, FSHResource.Categories, IsBasic: true),
+        new("View Categories", FSHAction.View, FSHResource.Categories, IsBasic: true),
+        new("Create Categories", FSHAction.Create, FSHResource.Categories),
+        new("Update Categories", FSHAction.Update, FSHResource.Categories),
+        new("Delete Categories", FSHAction.Delete, FSHResource.Categories),
+        new("Search UnitsOfMeasurements", FSHAction.Search, FSHResource.UnitsOfMeasurements, IsBasic: true),
+        new("View UnitsOfMeasurements", FSHAction.View, FSHResource.UnitsOfMeasurements, IsBasic: true),
+        new("Create UnitsOfMeasurements", FSHAction.Create, FSHResource.UnitsOfMeasurements),
+        new("Update UnitsOfMeasurements", FSHAction.Update, FSHResource.UnitsOfMeasurements),
+        new("Delete UnitsOfMeasurements", FSHAction.Delete, FSHResource.UnitsOfMeasurements),
+        new("Search UnitsOfMeasurementsConversion", FSHAction.Search, FSHResource.UnitsOfMeasurementsConversion, IsBasic: true),
+        new("View UnitsOfMeasurementsConversion", FSHAction.View, FSHResource.UnitsOfMeasurementsConversion, IsBasic: true),
+        new("Create UnitsOfMeasurementsConversion", FSHAction.Create, FSHResource.UnitsOfMeasurementsConversion),
+        new("Update UnitsOfMeasurementsConversion", FSHAction.Update, FSHResource.UnitsOfMeasurementsConversion),
+        new("Delete UnitsOfMeasurementsConversion", FSHAction.Delete, FSHResource.UnitsOfMeasurementsConversion),
+        new("Search Suppliers", FSHAction.Search, FSHResource.Suppliers, IsBasic: true),
+        new("View Suppliers", FSHAction.View, FSHResource.Suppliers, IsBasic: true),
+        new("Create Suppliers", FSHAction.Create, FSHResource.Suppliers),
+        new("Update Suppliers", FSHAction.Update, FSHResource.Suppliers),
+        new("Delete Suppliers", FSHAction.Delete, FSHResource.Suppliers),
         new("View Tenants", FSHAction.View, FSHResource.Tenants, IsRoot: true),
         new("Create Tenants", FSHAction.Create, FSHResource.Tenants, IsRoot: true),
         new("Update Tenants", FSHAction.Update, FSHResource.Tenants, IsRoot: true),
-        new("Upgrade Tenant Subscription", FSHAction.UpgradeSubscription, FSHResource.Tenants, IsRoot: true)
+        new("Upgrade Tenant Subscription", FSHAction.UpgradeSubscription, FSHResource.Tenants, IsRoot: true),
+        new("Create Purchase Order Headers", FSHAction.Create, FSHResource.PurchaseOrderHeaders),
+        new("Delete Purchase Order Header", FSHAction.Delete,FSHResource.PurchaseOrderHeaders),
+        new("Update Purchase Order Header", FSHAction.Update,FSHResource.PurchaseOrderHeaders),
+        new("View Purchase Order Header", FSHAction.View, FSHResource.PurchaseOrderHeaders),
+
+        new("Create Purchase Order", FSHAction.Create, FSHResource.PurchaseOrder),
+        new("Delete Purchase Order", FSHAction.Delete, FSHResource.PurchaseOrder),
+        new("Update Purchase Order", FSHAction.Update, FSHResource.PurchaseOrder),
+        new("View Purchase Order", FSHAction.View, FSHResource.PurchaseOrder)
     };
 
     public static IReadOnlyList<FSHPermission> All { get; } = new ReadOnlyCollection<FSHPermission>(_all);
     public static IReadOnlyList<FSHPermission> Root { get; } = new ReadOnlyCollection<FSHPermission>(_all.Where(p => p.IsRoot).ToArray());
     public static IReadOnlyList<FSHPermission> Admin { get; } = new ReadOnlyCollection<FSHPermission>(_all.Where(p => !p.IsRoot).ToArray());
     public static IReadOnlyList<FSHPermission> Basic { get; } = new ReadOnlyCollection<FSHPermission>(_all.Where(p => p.IsBasic).ToArray());
+
 }
 
 public record FSHPermission(string Description, string Action, string Resource, bool IsBasic = false, bool IsRoot = false)
